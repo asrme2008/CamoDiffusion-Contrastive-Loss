@@ -1,4 +1,4 @@
-# Diffusion Model without Gated OFM + Contrastive Feature Loss
+# Diffusion Model + Contrastive Feature Loss
 
 This repository packages a  CamoDiffusion adaptation with an additional multi-scale contrastive feature-loss term. It includes the two training notebooks and every Python source module they import.
 
