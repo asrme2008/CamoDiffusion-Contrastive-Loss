@@ -1,17 +1,15 @@
 # Diffusion Model without Gated OFM + Contrastive Feature Loss
 
-This repository packages a no-Gated-OFM CamoDiffusion adaptation with an additional multi-scale contrastive feature-loss term. It includes the two training notebooks and every Python source module they import.
-
-**The notebooks do not clone the authors' GitHub source repository.** The model, data pipeline, loss, checkpoint handling, and training code are present in this project. When a notebook is run from a workspace that does not already contain these files, its setup cell can clone **your own project repository** (using the configured repository URL) or it can load the files from an attached Kaggle dataset.
+This repository packages a  CamoDiffusion adaptation with an additional multi-scale contrastive feature-loss term. It includes the two training notebooks and every Python source module they import.
 
 The model is based on the CamoDiffusion architecture and adapted with reference to the authors' official implementation. The Gated OFM module is omitted, GroupNorm is used in the denoising blocks, and the contrastive objective and experiment workflow are project-specific additions. This is not the authors' official repository.
 
-> **Attribution and licensing:** The code is informed by the CamoDiffusion architecture and implementation. The upstream repository's visible root listing did not show a `LICENSE` file when checked. Citation is not a software license. Before publicly redistributing adapted source code, check any applicable terms and ask the maintainers if the terms are unclear.
+
 
 ## Repository layout
 
 ```text
-Diffusion-Contrastive-Loss-No-OFM/
+Diffusion-Contrastive-Loss/
 ├── README.md
 ├── THIRD_PARTY_NOTICES.md
 ├── REFERENCES.bib
@@ -32,7 +30,7 @@ Diffusion-Contrastive-Loss-No-OFM/
 - `camodiffusion_contrastive_training.py`: image/mask dataset handling, diffusion/noise scheduler, contrastive training loop, evaluation-loss loop, checkpoints and optional Kaggle checkpoint upload.
 - `contrastive_loss.py`: multi-scale object/background contrastive feature loss.
 
-Both stages use the same `CamoDiffusionModel` architecture without Gated OFM and optimize `weighted_BCE_IoU + lambda * contrastive_feature_loss`. The contrastive term is applied to the four ATCN feature maps. Defaults are `lambda=0.1`, `delta=0.3`, and `w_boundary=3.0`; set `LAMBDA=0.0` in a notebook to disable the contrastive term.
+Both stages use the same `CamoDiffusionModel` architecture and optimize `weighted_BCE_IoU + lambda * contrastive_feature_loss`. The contrastive term is applied to the four ATCN feature maps. Defaults are `lambda=0.1`, `delta=0.3`, and `w_boundary=3.0`; set `LAMBDA=0.0` in a notebook to disable the contrastive term.
 
 The validation value written by this trainer is a weighted BCE+IoU loss, not a benchmark COD metric such as MAE, S-measure, weighted F-measure, or E-measure. Use a separate evaluation workflow to report benchmark metrics.
 
@@ -52,8 +50,6 @@ When `pretrained=True`, `build_atcn` loads the standard ImageNet-1K pretrained P
 ## Checkpoint compatibility
 
 Use only checkpoints created with this project's no-Gated-OFM model definition. Do not reuse Gated-OFM checkpoints or checkpoints from a different model class: their state dictionaries may not match. The full `checkpoint_last.pt` is intended for resuming the same stage; `model-best.pt` contains model weights intended to initialize Stage 2.
-
-## Acknowledgements
 
 We acknowledge Zhongxi Chen, Ke Sun, Xianming Lin, and Rongrong Ji for the CamoDiffusion research and official implementation that informed this adapted model. Please cite the original work using the entries in `REFERENCES.bib` (Chen et al., AAAI 2024; Sun et al., TPAMI 2025). This repository does not clone the authors' source tree at runtime. We distinguish the upstream method from our project-specific addition, the contrastive feature-loss term and its training workflow. See `THIRD_PARTY_NOTICES.md` and `REFERENCES.bib`.
 
