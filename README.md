@@ -53,4 +53,7 @@ Use only checkpoints created with this project's no-Gated-OFM model definition. 
 
 We acknowledge Zhongxi Chen, Ke Sun, Xianming Lin, and Rongrong Ji for the CamoDiffusion research and official implementation that informed this adapted model. Please cite the original work using the entries in `REFERENCES.bib` (Chen et al., AAAI 2024; Sun et al., TPAMI 2025). This repository does not clone the authors' source tree at runtime. We distinguish the upstream method from our project-specific addition, the contrastive feature-loss term and its training workflow. See `THIRD_PARTY_NOTICES.md` and `REFERENCES.bib`.
 
-Original project: https://github.com/Rapisurazurite/CamoDiffusion
+Reference code: https://github.com/Rapisurazurite/CamoDiffusion
+CAM0:https://www.kaggle.com/datasets/ivanomelchenkoim11/camo-dataset
+COD10K:https://www.kaggle.com/datasets/ivanomelchenkoim11/cod10k-dataset
+NC4K:https://www.kaggle.com/datasets/ivanomelchenkoim11/nc4k-dataset/
